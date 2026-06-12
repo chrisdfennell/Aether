@@ -1,0 +1,61 @@
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://developer.garmin.com/downloads/connect-iq/resources.xsd">
+    <string id="AppName">Aether</string>
+    
+    <!-- Core Display -->
+    <string id="ShowSecondsTitle">Show Seconds Hand</string>
+    <string id="ShowDigitalTimeTitle">Show Digital Time</string>
+    <string id="ShowDateTitle">Show Date</string>
+    <string id="ShowWeatherTitle">Show Weather</string>
+    
+    <!-- Layout & Style -->
+    <string id="LayoutStyleTitle">Layout Style</string>
+    <string id="LayoutBalanced">Balanced Elegant</string>
+    <string id="LayoutWeatherHero">Weather Hero</string>
+    <string id="LayoutMinimal">Minimal Analog</string>
+    <string id="LayoutDataRich">Data Rich</string>
+    
+    <string id="BgStyleTitle">Background Style</string>
+    <string id="BgPure">Pure Midnight</string>
+    <string id="BgHorizon">Subtle Horizon</string>
+    <string id="BgWeather">Weather Adaptive</string>
+    
+    <!-- Color Theme - Beautiful Palette -->
+    <string id="ColorThemeTitle">Accent Color</string>
+    <string id="ThemeRoseGold">Rose Gold</string>
+    <string id="ThemeArctic">Arctic Teal</string>
+    <string id="ThemeEmber">Ember Orange</string>
+    <string id="ThemeMidnightGold">Midnight Gold</string>
+    <string id="ThemeForest">Forest Green</string>
+    <string id="ThemeLavender">Lavender Mist</string>
+    <string id="ThemePearl">Pearl Silver</string>
+    <string id="ThemeSolar">Solar Amber</string>
+
+    <!-- Data Slots -->
+    <string id="DataTopLeftTitle">Top Left Complication</string>
+    <string id="DataTopRightTitle">Top Right Complication</string>
+    <string id="DataBottomLeftTitle">Bottom Left Complication</string>
+    <string id="DataBottomRightTitle">Bottom Right Complication</string>
+    
+    <!-- Data Options (expanded) -->
+    <string id="DataNone">None</string>
+    <string id="DataSteps">Steps + Goal Ring</string>
+    <string id="DataBattery">Battery + Solar</string>
+    <string id="DataHR">Heart Rate</string>
+    <string id="DataWeather">Weather Temp</string>
+    <string id="DataCalories">Calories</string>
+    <string id="DataActiveMinutes">Active Minutes</string>
+    <string id="DataDistance">Distance</string>
+    <string id="DataHRGraph">HR Sparkline</string>
+    <string id="DataSolar">Solar Intensity</string>
+    <string id="DataStepGoalPct">Step Goal %</string>
+    <string id="DataFloors">Floors</string>
+    <string id="DataBodyBattery">Body Battery</string>
+    <string id="DataStress">Stress</string>
+    <string id="DataRecovery">Recovery Time</string>
+    <string id="DataAltitude">Altitude</string>
+    <string id="DataSunrise">Sunrise / Sunset</string>
+    <string id="DataNotifications">Notifications</string>
+    <string id="DataAlarms">Alarms</string>
+    <string id="DataRespiration">Respiration</string>
+    <string id="DataBaro">Barometer</string>
+</strings>

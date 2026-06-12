@@ -1,0 +1,151 @@
+<settings>
+    <!-- Core Visibility -->
+    <setting propertyKey="@Properties.ShowSeconds" title="@Strings.ShowSecondsTitle" prompt="@Strings.ShowSecondsTitle">
+        <settingConfig type="boolean" />
+    </setting>
+    <setting propertyKey="@Properties.ShowDigitalTime" title="@Strings.ShowDigitalTimeTitle" prompt="@Strings.ShowDigitalTimeTitle">
+        <settingConfig type="boolean" />
+    </setting>
+    <setting propertyKey="@Properties.ShowDate" title="@Strings.ShowDateTitle" prompt="@Strings.ShowDateTitle">
+        <settingConfig type="boolean" />
+    </setting>
+    <setting propertyKey="@Properties.ShowWeather" title="@Strings.ShowWeatherTitle" prompt="@Strings.ShowWeatherTitle">
+        <settingConfig type="boolean" />
+    </setting>
+
+    <!-- Layout & Aesthetics - Full Customization in Garmin Connect App -->
+    <setting propertyKey="@Properties.LayoutStyle" title="@Strings.LayoutStyleTitle" prompt="@Strings.LayoutStyleTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.LayoutBalanced</listEntry>
+            <listEntry value="1">@Strings.LayoutWeatherHero</listEntry>
+            <listEntry value="2">@Strings.LayoutMinimal</listEntry>
+            <listEntry value="3">@Strings.LayoutDataRich</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.BgStyle" title="@Strings.BgStyleTitle" prompt="@Strings.BgStyleTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.BgPure</listEntry>
+            <listEntry value="1">@Strings.BgHorizon</listEntry>
+            <listEntry value="2">@Strings.BgWeather</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.ColorTheme" title="@Strings.ColorThemeTitle" prompt="@Strings.ColorThemeTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.ThemeRoseGold</listEntry>
+            <listEntry value="1">@Strings.ThemeArctic</listEntry>
+            <listEntry value="2">@Strings.ThemeEmber</listEntry>
+            <listEntry value="3">@Strings.ThemeMidnightGold</listEntry>
+            <listEntry value="4">@Strings.ThemeForest</listEntry>
+            <listEntry value="5">@Strings.ThemeLavender</listEntry>
+            <listEntry value="6">@Strings.ThemePearl</listEntry>
+            <listEntry value="7">@Strings.ThemeSolar</listEntry>
+        </settingConfig>
+    </setting>
+
+    <!-- Four beautiful complication slots for all the info you want -->
+    <setting propertyKey="@Properties.DataTL" title="@Strings.DataTopLeftTitle" prompt="@Strings.DataTopLeftTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.DataNone</listEntry>
+            <listEntry value="1">@Strings.DataSteps</listEntry>
+            <listEntry value="2">@Strings.DataHR</listEntry>
+            <listEntry value="3">@Strings.DataBattery</listEntry>
+            <listEntry value="4">@Strings.DataWeather</listEntry>
+            <listEntry value="5">@Strings.DataCalories</listEntry>
+            <listEntry value="6">@Strings.DataActiveMinutes</listEntry>
+            <listEntry value="7">@Strings.DataDistance</listEntry>
+            <listEntry value="8">@Strings.DataHRGraph</listEntry>
+            <listEntry value="9">@Strings.DataSolar</listEntry>
+            <listEntry value="10">@Strings.DataStepGoalPct</listEntry>
+            <listEntry value="11">@Strings.DataFloors</listEntry>
+            <listEntry value="12">@Strings.DataBodyBattery</listEntry>
+            <listEntry value="13">@Strings.DataStress</listEntry>
+            <listEntry value="14">@Strings.DataRecovery</listEntry>
+            <listEntry value="15">@Strings.DataAltitude</listEntry>
+            <listEntry value="16">@Strings.DataSunrise</listEntry>
+            <listEntry value="17">@Strings.DataNotifications</listEntry>
+            <listEntry value="18">@Strings.DataAlarms</listEntry>
+            <listEntry value="19">@Strings.DataRespiration</listEntry>
+            <listEntry value="20">@Strings.DataBaro</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.DataTR" title="@Strings.DataTopRightTitle" prompt="@Strings.DataTopRightTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.DataNone</listEntry>
+            <listEntry value="1">@Strings.DataSteps</listEntry>
+            <listEntry value="2">@Strings.DataHR</listEntry>
+            <listEntry value="3">@Strings.DataBattery</listEntry>
+            <listEntry value="4">@Strings.DataWeather</listEntry>
+            <listEntry value="5">@Strings.DataCalories</listEntry>
+            <listEntry value="6">@Strings.DataActiveMinutes</listEntry>
+            <listEntry value="7">@Strings.DataDistance</listEntry>
+            <listEntry value="8">@Strings.DataHRGraph</listEntry>
+            <listEntry value="9">@Strings.DataSolar</listEntry>
+            <listEntry value="10">@Strings.DataStepGoalPct</listEntry>
+            <listEntry value="11">@Strings.DataFloors</listEntry>
+            <listEntry value="12">@Strings.DataBodyBattery</listEntry>
+            <listEntry value="13">@Strings.DataStress</listEntry>
+            <listEntry value="14">@Strings.DataRecovery</listEntry>
+            <listEntry value="15">@Strings.DataAltitude</listEntry>
+            <listEntry value="16">@Strings.DataSunrise</listEntry>
+            <listEntry value="17">@Strings.DataNotifications</listEntry>
+            <listEntry value="18">@Strings.DataAlarms</listEntry>
+            <listEntry value="19">@Strings.DataRespiration</listEntry>
+            <listEntry value="20">@Strings.DataBaro</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.DataBL" title="@Strings.DataBottomLeftTitle" prompt="@Strings.DataBottomLeftTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.DataNone</listEntry>
+            <listEntry value="1">@Strings.DataSteps</listEntry>
+            <listEntry value="2">@Strings.DataHR</listEntry>
+            <listEntry value="3">@Strings.DataBattery</listEntry>
+            <listEntry value="4">@Strings.DataWeather</listEntry>
+            <listEntry value="5">@Strings.DataCalories</listEntry>
+            <listEntry value="6">@Strings.DataActiveMinutes</listEntry>
+            <listEntry value="7">@Strings.DataDistance</listEntry>
+            <listEntry value="8">@Strings.DataHRGraph</listEntry>
+            <listEntry value="9">@Strings.DataSolar</listEntry>
+            <listEntry value="10">@Strings.DataStepGoalPct</listEntry>
+            <listEntry value="11">@Strings.DataFloors</listEntry>
+            <listEntry value="12">@Strings.DataBodyBattery</listEntry>
+            <listEntry value="13">@Strings.DataStress</listEntry>
+            <listEntry value="14">@Strings.DataRecovery</listEntry>
+            <listEntry value="15">@Strings.DataAltitude</listEntry>
+            <listEntry value="16">@Strings.DataSunrise</listEntry>
+            <listEntry value="17">@Strings.DataNotifications</listEntry>
+            <listEntry value="18">@Strings.DataAlarms</listEntry>
+            <listEntry value="19">@Strings.DataRespiration</listEntry>
+            <listEntry value="20">@Strings.DataBaro</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.DataBR" title="@Strings.DataBottomRightTitle" prompt="@Strings.DataBottomRightTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.DataNone</listEntry>
+            <listEntry value="1">@Strings.DataSteps</listEntry>
+            <listEntry value="2">@Strings.DataHR</listEntry>
+            <listEntry value="3">@Strings.DataBattery</listEntry>
+            <listEntry value="4">@Strings.DataWeather</listEntry>
+            <listEntry value="5">@Strings.DataCalories</listEntry>
+            <listEntry value="6">@Strings.DataActiveMinutes</listEntry>
+            <listEntry value="7">@Strings.DataDistance</listEntry>
+            <listEntry value="8">@Strings.DataHRGraph</listEntry>
+            <listEntry value="9">@Strings.DataSolar</listEntry>
+            <listEntry value="10">@Strings.DataStepGoalPct</listEntry>
+            <listEntry value="11">@Strings.DataFloors</listEntry>
+            <listEntry value="12">@Strings.DataBodyBattery</listEntry>
+            <listEntry value="13">@Strings.DataStress</listEntry>
+            <listEntry value="14">@Strings.DataRecovery</listEntry>
+            <listEntry value="15">@Strings.DataAltitude</listEntry>
+            <listEntry value="16">@Strings.DataSunrise</listEntry>
+            <listEntry value="17">@Strings.DataNotifications</listEntry>
+            <listEntry value="18">@Strings.DataAlarms</listEntry>
+            <listEntry value="19">@Strings.DataRespiration</listEntry>
+            <listEntry value="20">@Strings.DataBaro</listEntry>
+        </settingConfig>
+    </setting>
+</settings>

@@ -1,0 +1,18 @@
+<properties>
+    <!-- Display toggles -->
+    <property id="ShowSeconds" type="boolean">true</property>
+    <property id="ShowDigitalTime" type="boolean">true</property>
+    <property id="ShowDate" type="boolean">true</property>
+    <property id="ShowWeather" type="boolean">true</property>
+    
+    <!-- Styles -->
+    <property id="LayoutStyle" type="number">0</property>
+    <property id="BgStyle" type="number">0</property>
+    <property id="ColorTheme" type="number">3</property> <!-- Default Midnight Gold -->
+    
+    <!-- 4 Complication slots (rich data options) -->
+    <property id="DataTL" type="number">0</property>  <!-- Top Left: Steps -->
+    <property id="DataTR" type="number">2</property>  <!-- Top Right: HR -->
+    <property id="DataBL" type="number">1</property>  <!-- Bottom Left: Battery -->
+    <property id="DataBR" type="number">16</property> <!-- Bottom Right: Sunrise -->
+</properties>
