@@ -1,0 +1,50 @@
+========================================================================
+GARMIN CONNECT IQ STORE LISTING INFO - AETHER WATCH FACE
+========================================================================
+
+------------------------------------------------------------------------
+FIELD: Title (Max 30 characters)
+------------------------------------------------------------------------
+Aether Luxury Analog
+
+
+------------------------------------------------------------------------
+FIELD: Description (Max 8000 characters)
+------------------------------------------------------------------------
+Aether is a premium, luxury mechanical-style watch face designed for Garmin smartwatches. Inspired by the classic elegance of iconic Swiss luxury timepieces, it blends mechanical aesthetics with modern health metrics.
+
+Key Features:
+- Obsidian black radial metallic sunburst dial background.
+- Gold-framed luminous baton hour markers and hand set.
+- Custom 3-point gold crown at 12 o'clock (legally safe design).
+- Magnifying "Cyclops" calendar date window at 3 o'clock.
+- Symmetrical circular Steps Count sub-dial at 9 o'clock.
+- Heart Rate (BPM) tracking centered on the lower dial.
+- Procedural weather status icon (sun/cloud) showing current temperature at 6 o'clock.
+- Elegant "Swiss Made" flanking details.
+- Power-saving Always-On-Display (AOD) with burn-in protection.
+
+
+------------------------------------------------------------------------
+FIELD: What's New in this Version (Max 8000 characters)
+------------------------------------------------------------------------
+Initial Release:
+- Rebuilt mechanical-style watch face layout.
+- Custom 3-point crown index at 12 o'clock.
+- Added steps count sub-dial and real-time heart rate readouts.
+- Added procedural weather icon and temperature displays.
+- Integrated magnifying date window.
+- Restored active sweeping needle seconds hand.
+
+
+------------------------------------------------------------------------
+FIELD: Settings (Select Yes/No as indicated)
+------------------------------------------------------------------------
+Category: Watch Faces
+Subcategory: Analog
+ANT+ Profiles: No
+Regional Limits: No
+Monetization: No
+Do you collect personal or sensitive data?: No
+Is this app designed for a specific company or event?: No
+========================================================================
