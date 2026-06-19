@@ -1,18 +1,91 @@
 <iq:manifest version="3" xmlns:iq="http://www.garmin.com/xml/connectiq">
+    <!--
+        Aether - a luxury digital watch face with live weather, a 5-day forecast,
+        and activity/health complications. The whole face is laid out relative to
+        dc.getWidth()/getHeight() and the screen center, and text is rendered with
+        runtime vector fonts (Graphics.getVectorFont) sized as a fraction of the
+        screen width - so a single resource set scales across every panel size with
+        no baked per-resolution fonts required.
+
+        Device list covers CIQ round watch faces: Forerunner, fenix/epix/enduro,
+        Venu/Vivoactive, Instinct, and the golf / dive / aviation / MARQ specialty
+        watches. Square/rectangular panels (Venu Sq 2, Venu X1) are excluded - the
+        centered circular layout is designed for round screens. Edge bike computers
+        and handheld GPS units are excluded (they do not run watch faces).
+
+        minApiLevel stays at 3.2.0 for the widest firmware compatibility; every
+        optional feature (vector fonts, Weather, SensorHistory, solar) is guarded
+        with a runtime `has` check so nothing crashes on a device that lacks it.
+    -->
     <iq:application id="cd90f75b-a88e-48cb-b149-70d490e34a1b" type="watchface" name="@Strings.AppName" entry="AetherApp" launcherIcon="@Drawables.LauncherIcon" minApiLevel="3.2.0">
         <iq:products>
-            <iq:product id="fenix7"/>
-            <iq:product id="fenix7s"/>
-            <iq:product id="fenix7x"/>
-            <iq:product id="epix2"/>
+            <!-- Forerunner -->
+            <iq:product id="fr165"/>
+            <iq:product id="fr165m"/>
+            <iq:product id="fr255"/>
+            <iq:product id="fr255m"/>
+            <iq:product id="fr255s"/>
+            <iq:product id="fr255sm"/>
+            <iq:product id="fr265"/>
+            <iq:product id="fr265s"/>
+            <iq:product id="fr57042mm"/>
+            <iq:product id="fr57047mm"/>
+            <iq:product id="fr955"/>
             <iq:product id="fr965"/>
-            <iq:product id="venu3"/>
-            <iq:product id="epix2pro51mm"/>
-            <iq:product id="epix2pro47mm"/>
+            <iq:product id="fr970"/>
+
+            <!-- fenix / epix / enduro -->
+            <iq:product id="fenix7"/>
+            <iq:product id="fenix7pro"/>
+            <iq:product id="fenix7pronowifi"/>
+            <iq:product id="fenix7s"/>
+            <iq:product id="fenix7spro"/>
+            <iq:product id="fenix7x"/>
+            <iq:product id="fenix7xpro"/>
+            <iq:product id="fenix7xpronowifi"/>
+            <iq:product id="fenix843mm"/>
             <iq:product id="fenix847mm"/>
-            <iq:product id="fenix8solar51mm"/>
-            <iq:product id="venu3s"/>
+            <iq:product id="fenix8pro47mm"/>
             <iq:product id="fenix8solar47mm"/>
+            <iq:product id="fenix8solar51mm"/>
+            <iq:product id="fenixe"/>
+            <iq:product id="epix2"/>
+            <iq:product id="epix2pro42mm"/>
+            <iq:product id="epix2pro47mm"/>
+            <iq:product id="epix2pro51mm"/>
+            <iq:product id="enduro3"/>
+
+            <!-- Venu / Vivoactive -->
+            <iq:product id="venu2"/>
+            <iq:product id="venu2plus"/>
+            <iq:product id="venu2s"/>
+            <iq:product id="venu3"/>
+            <iq:product id="venu3s"/>
+            <iq:product id="venu441mm"/>
+            <iq:product id="venu445mm"/>
+            <iq:product id="vivoactive5"/>
+            <iq:product id="vivoactive6"/>
+
+            <!-- Instinct -->
+            <iq:product id="instinct3amoled45mm"/>
+            <iq:product id="instinct3amoled50mm"/>
+            <iq:product id="instinct3solar45mm"/>
+            <iq:product id="instinctcrossoveramoled"/>
+            <iq:product id="instincte40mm"/>
+            <iq:product id="instincte45mm"/>
+
+            <!-- Specialty: golf (Approach), dive (Descent), aviation (D2), MARQ -->
+            <iq:product id="approachs50"/>
+            <iq:product id="approachs7042mm"/>
+            <iq:product id="approachs7047mm"/>
+            <iq:product id="d2airx10"/>
+            <iq:product id="d2mach1"/>
+            <iq:product id="d2mach2"/>
+            <iq:product id="descentg2"/>
+            <iq:product id="descentmk343mm"/>
+            <iq:product id="descentmk351mm"/>
+            <iq:product id="marq2"/>
+            <iq:product id="marq2aviator"/>
         </iq:products>
         <iq:permissions>
             <iq:uses-permission id="SensorHistory"/>

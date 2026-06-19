@@ -26,5 +26,11 @@ Desktop.ini
 compress.ps1
 *temp*
 
+# Keep GitHub community-health files: "TEMPLATE" contains "temp", so the
+# case-insensitive *temp* rule above would otherwise ignore them.
+!.github/PULL_REQUEST_TEMPLATE.md
+!.github/ISSUE_TEMPLATE/
+!.github/ISSUE_TEMPLATE/*
+
 # Local build configurations
 build_config.json

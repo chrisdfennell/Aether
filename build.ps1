@@ -39,11 +39,11 @@ $keyPath = Join-Path $PSScriptRoot "developer_key.der"
 
 if ($Export) {
     Write-Host "Packaging application for Connect IQ Store (.iq)..." -ForegroundColor Cyan
-    $outputPath = Join-Path $PSScriptRoot "bin\AetherWatchFace.iq"
+    $outputPath = Join-Path $PSScriptRoot "bin\Aether.iq"
     & $monkeyc -e -f $junglePath -o $outputPath -y $keyPath
 } else {
     Write-Host "Building for device: $Device..." -ForegroundColor Cyan
-    $outputPath = Join-Path $PSScriptRoot "bin\AetherWatchFace.prg"
+    $outputPath = Join-Path $PSScriptRoot "bin\Aether.prg"
     & $monkeyc -f $junglePath -o $outputPath -y $keyPath -d $Device
 }
 
@@ -53,9 +53,9 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 if ($Export) {
-    Write-Host "Package Succeeded! Output: bin\AetherWatchFace.iq" -ForegroundColor Green
+    Write-Host "Package Succeeded! Output: bin\Aether.iq" -ForegroundColor Green
 } else {
-    Write-Host "Build Succeeded! Output: bin\AetherWatchFace.prg" -ForegroundColor Green
+    Write-Host "Build Succeeded! Output: bin\Aether.prg" -ForegroundColor Green
 }
 
 # 5. Launch in Simulator if requested
@@ -76,19 +76,15 @@ if ($Run) {
     if (!(Test-Path -Path $tempDir)) {
         New-Item -ItemType Directory -Path $tempDir | Out-Null
     }
-    $tempPrg = Join-Path $tempDir "AetherWatchFace.prg"
+    $tempPrg = Join-Path $tempDir "Aether.prg"
     Copy-Item $outputPath $tempPrg -Force
-    
-    $settingsSrc = Join-Path $PSScriptRoot "bin\AetherWatchFace-settings.json"
+
+    $settingsSrc = Join-Path $PSScriptRoot "bin\Aether-settings.json"
     $appId = "cd90f75b-a88e-48cb-b149-70d490e34a1b"
     $settingsNames = @(
-        "AetherWatchFace-settings.json",
-        "AetherWatchFace.json",
         "Aether-settings.json",
         "Aether.json",
-        "Aether_Watch-settings.json",
-        "Aether_Watch.json",
-        "AETHERWATCHFACE.json",
+        "AETHER.json",
         "$appId.json",
         "$appId-settings.json"
     )

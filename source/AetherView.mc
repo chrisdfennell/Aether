@@ -19,6 +19,7 @@ class AetherView extends WatchUi.WatchFace {
     private var mCenterY as Number = 0;
     private var mRadius as Number = 0;
     private var mIsSleep as Boolean = true;
+    private var mIsMip as Boolean = false;  // MIP (non-AMOLED) panel — drives larger complication fonts
 
     // Settings (kept for compatibility)
     private var mShowSecondsSetting as Boolean = true;
@@ -93,15 +94,28 @@ class AetherView extends WatchUi.WatchFace {
     }
 
     function initFonts() as Void {
+        // MIP (non-AMOLED) panels render these fixed-size complication fonts too
+        // small to read. AMOLED panels are the ones that require burn-in
+        // protection, so use that as the proxy and scale the steps / weather text
+        // up on MIP only; AMOLED keeps the original tuned sizes.
+        var deviceSettings = System.getDeviceSettings();
+        mIsMip = !((deviceSettings has :requiresBurnInProtection) && deviceSettings.requiresBurnInProtection);
+        var dataScale = mIsMip ? 1.3 : 1.0;
+        var dataFallback = mIsMip ? Graphics.FONT_TINY : Graphics.FONT_XTINY;
+
         mFontBrand = Graphics.FONT_XTINY;
         mFontSubBrand = Graphics.FONT_XTINY;
-        mFontBottom = Graphics.FONT_XTINY;
-        mFontSwiss = Graphics.FONT_XTINY;
+        mFontBottom = dataFallback;
+        mFontSwiss = dataFallback;
         mFontDate = Graphics.FONT_XTINY;
 
         if (Graphics has :getVectorFont) {
             var face = ["RobotoCondensedBold", "sans-serif"] as Array<String>;
             var faceRegular = ["RobotoCondensedRegular", "sans-serif"] as Array<String>;
+            // On MIP the thin regular strokes wash out, so render the steps /
+            // weather complication text in the bold face for thicker, more
+            // legible glyphs; AMOLED keeps the lighter regular weight.
+            var dataFace = mIsMip ? face : faceRegular;
 
             var fontBrand = Graphics.getVectorFont({
                 :face => face,
@@ -120,16 +134,16 @@ class AetherView extends WatchUi.WatchFace {
             }
 
             var fontBottom = Graphics.getVectorFont({
-                :face => faceRegular,
-                :size => 11
+                :face => dataFace,
+                :size => (11 * dataScale).toNumber()
             });
             if (fontBottom != null) {
                 mFontBottom = fontBottom;
             }
 
             var fontSwiss = Graphics.getVectorFont({
-                :face => faceRegular,
-                :size => 9
+                :face => dataFace,
+                :size => (9 * dataScale).toNumber()
             });
             if (fontSwiss != null) {
                 mFontSwiss = fontSwiss;
@@ -360,15 +374,18 @@ class AetherView extends WatchUi.WatchFace {
         var x = cx - (rad * 0.70).toNumber();
         var y = cy;
 
+        // Sub-dial grows on MIP to hold the larger, more legible step text.
+        var dialR = mIsMip ? 21 : 18;
+
         // Circular sub-dial background (filled with dial background color to clear any ticks)
         var bgColor = 0x05070A; // Base dial color
         dc.setColor(bgColor, Graphics.COLOR_TRANSPARENT);
-        dc.fillCircle(x, y, 19);
+        dc.fillCircle(x, y, dialR + 1);
 
         // Gold outer ring
         dc.setColor(goldColor, Graphics.COLOR_TRANSPARENT);
         dc.setPenWidth(1.5);
-        dc.drawCircle(x, y, 18);
+        dc.drawCircle(x, y, dialR);
 
         // Get steps
         var steps = 0;
@@ -391,12 +408,14 @@ class AetherView extends WatchUi.WatchFace {
         }
 
         // Draw "STEPS" label in gray/gold at the top half
+        var labelDy = mIsMip ? 8 : 6;
+        var valueDy = mIsMip ? 7 : 5;
         dc.setColor(grayColor, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(x, y - 6, fontSwiss, "STEPS", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(x, y - labelDy, fontSwiss, "STEPS", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
 
         // Draw step value in white/gold at the bottom half
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(x, y + 5, fontBottom, stepsStr, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(x, y + valueDy, fontBottom, stepsStr, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
     function drawWeather(dc as Dc, cx as Number, cy as Number, rad as Number, goldColor as Number, grayColor as Number) as Void {
@@ -438,22 +457,27 @@ class AetherView extends WatchUi.WatchFace {
             return;
         }
 
+        // Icon grows on MIP to hold the larger, more legible temperature text.
+        var sunR = mIsMip ? 12 : 9;
+
         // Draw icon
         if (isSunny) {
             // Gold sun circle
             dc.setColor(goldColor, Graphics.COLOR_TRANSPARENT);
-            dc.fillCircle(x, y, 9);
+            dc.fillCircle(x, y, sunR);
             // Opposite color text (dark background color of watch face)
             dc.setColor(0x05070A, Graphics.COLOR_TRANSPARENT);
             dc.drawText(x, y, fontSwiss, tempStr, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
         } else {
             // White cloud
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-            // Procedural cloud shape
-            dc.fillCircle(x - 5, y + 2, 5);
-            dc.fillCircle(x + 5, y + 2, 5);
-            dc.fillCircle(x, y - 2, 7);
-            dc.fillRectangle(x - 5, y + 1, 10, 6);
+            // Procedural cloud shape (scaled up on MIP)
+            var cl = mIsMip ? 7 : 5;   // lower puff radius
+            var cu = mIsMip ? 9 : 7;   // upper puff radius
+            dc.fillCircle(x - cl, y + 2, cl);
+            dc.fillCircle(x + cl, y + 2, cl);
+            dc.fillCircle(x, y - 2, cu);
+            dc.fillRectangle(x - cl, y + 1, 2 * cl, cl + 1);
 
             // Opposite color text
             dc.setColor(0x05070A, Graphics.COLOR_TRANSPARENT);
