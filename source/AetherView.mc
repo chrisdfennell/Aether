@@ -100,11 +100,11 @@ class AetherView extends WatchUi.WatchFace {
         // up on MIP only; AMOLED keeps the original tuned sizes.
         var deviceSettings = System.getDeviceSettings();
         mIsMip = !((deviceSettings has :requiresBurnInProtection) && deviceSettings.requiresBurnInProtection);
-        var dataScale = mIsMip ? 1.3 : 1.0;
+        var dataScale = mIsMip ? 1.5 : 1.0;
         var dataFallback = mIsMip ? Graphics.FONT_TINY : Graphics.FONT_XTINY;
 
         mFontBrand = Graphics.FONT_XTINY;
-        mFontSubBrand = Graphics.FONT_XTINY;
+        mFontSubBrand = dataFallback;
         mFontBottom = dataFallback;
         mFontSwiss = dataFallback;
         mFontDate = Graphics.FONT_XTINY;
@@ -125,9 +125,11 @@ class AetherView extends WatchUi.WatchFace {
                 mFontBrand = fontBrand;
             }
 
+            // HR value ("84") — bold and larger on MIP so it reads on a
+            // transflective panel; AMOLED keeps the regular size-14 weight.
             var fontSubBrand = Graphics.getVectorFont({
-                :face => faceRegular,
-                :size => 14
+                :face => dataFace,
+                :size => (14 * dataScale).toNumber()
             });
             if (fontSubBrand != null) {
                 mFontSubBrand = fontSubBrand;
@@ -375,7 +377,7 @@ class AetherView extends WatchUi.WatchFace {
         var y = cy;
 
         // Sub-dial grows on MIP to hold the larger, more legible step text.
-        var dialR = mIsMip ? 21 : 18;
+        var dialR = mIsMip ? 24 : 18;
 
         // Circular sub-dial background (filled with dial background color to clear any ticks)
         var bgColor = 0x05070A; // Base dial color
@@ -407,10 +409,11 @@ class AetherView extends WatchUi.WatchFace {
             return;
         }
 
-        // Draw "STEPS" label in gray/gold at the top half
-        var labelDy = mIsMip ? 8 : 6;
-        var valueDy = mIsMip ? 7 : 5;
-        dc.setColor(grayColor, Graphics.COLOR_TRANSPARENT);
+        // Draw "STEPS" label at the top half. On MIP the dark accent barely
+        // shows on the black face, so use the brighter accent there.
+        var labelDy = mIsMip ? 10 : 6;
+        var valueDy = mIsMip ? 9 : 5;
+        dc.setColor(mIsMip ? goldColor : grayColor, Graphics.COLOR_TRANSPARENT);
         dc.drawText(x, y - labelDy, fontSwiss, "STEPS", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
 
         // Draw step value in white/gold at the bottom half
@@ -456,9 +459,12 @@ class AetherView extends WatchUi.WatchFace {
         if (fontSwiss == null) {
             return;
         }
+        // On MIP use the larger value font for the temperature so it reads from
+        // the wrist; AMOLED keeps the compact size that fits the original icon.
+        var tempFont = (mIsMip && mFontBottom != null) ? mFontBottom : fontSwiss;
 
         // Icon grows on MIP to hold the larger, more legible temperature text.
-        var sunR = mIsMip ? 12 : 9;
+        var sunR = mIsMip ? 15 : 9;
 
         // Draw icon
         if (isSunny) {
@@ -467,13 +473,13 @@ class AetherView extends WatchUi.WatchFace {
             dc.fillCircle(x, y, sunR);
             // Opposite color text (dark background color of watch face)
             dc.setColor(0x05070A, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(x, y, fontSwiss, tempStr, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+            dc.drawText(x, y, tempFont, tempStr, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
         } else {
             // White cloud
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
             // Procedural cloud shape (scaled up on MIP)
-            var cl = mIsMip ? 7 : 5;   // lower puff radius
-            var cu = mIsMip ? 9 : 7;   // upper puff radius
+            var cl = mIsMip ? 9 : 5;    // lower puff radius
+            var cu = mIsMip ? 12 : 7;   // upper puff radius
             dc.fillCircle(x - cl, y + 2, cl);
             dc.fillCircle(x + cl, y + 2, cl);
             dc.fillCircle(x, y - 2, cu);
@@ -481,7 +487,7 @@ class AetherView extends WatchUi.WatchFace {
 
             // Opposite color text
             dc.setColor(0x05070A, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(x, y + 1, fontSwiss, tempStr, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+            dc.drawText(x, y + 1, tempFont, tempStr, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
         }
     }
 
@@ -550,11 +556,13 @@ class AetherView extends WatchUi.WatchFace {
             dc.drawText(cx, cy + (rad * 0.40).toNumber() - 8, fontBottom, "CHRONOMETER", Graphics.TEXT_JUSTIFY_CENTER);
         }
 
-        // Swiss Made flanking the 6 o'clock marker if vector, or at the bottom if bitmap
+        // Swiss Made flanking the 6 o'clock marker if vector, or at the bottom if bitmap.
+        // On MIP the weather icon below is larger, so push the flanks further out.
         if (hasVector) {
             var swissY = cy + (rad * 0.81).toNumber();
-            dc.drawText(cx - 13, swissY, fontSwiss, "SWISS", Graphics.TEXT_JUSTIFY_RIGHT | Graphics.TEXT_JUSTIFY_VCENTER);
-            dc.drawText(cx + 13, swissY, fontSwiss, "MADE", Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER);
+            var swissDx = mIsMip ? 22 : 13;
+            dc.drawText(cx - swissDx, swissY, fontSwiss, "SWISS", Graphics.TEXT_JUSTIFY_RIGHT | Graphics.TEXT_JUSTIFY_VCENTER);
+            dc.drawText(cx + swissDx, swissY, fontSwiss, "MADE", Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER);
         } else {
             dc.drawText(cx, cy + (rad * 0.86).toNumber() - 8, fontSwiss, "SWISS  •  MADE", Graphics.TEXT_JUSTIFY_CENTER);
         }
@@ -662,8 +670,9 @@ class AetherView extends WatchUi.WatchFace {
             dc.drawText(cx, cy + (rad * 0.20).toNumber() - 8, fontSubBrand, hrStr, Graphics.TEXT_JUSTIFY_CENTER);
         }
 
-        // Label "BPM" centered at cy + rad * 0.28
-        dc.setColor(grayColor, Graphics.COLOR_TRANSPARENT);
+        // Label "BPM" centered at cy + rad * 0.28. On MIP the dark accent reads
+        // as near-invisible on the black face, so use the brighter accent there.
+        dc.setColor(mIsMip ? goldColor : grayColor, Graphics.COLOR_TRANSPARENT);
         if (hasVector) {
             dc.drawText(cx, cy + (rad * 0.29).toNumber(), fontSwiss, "BPM", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
         } else {
